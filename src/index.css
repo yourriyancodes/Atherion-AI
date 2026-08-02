@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root, html.dark, body.dark {
+    color-scheme: dark;
+    --bg-app: #0A0A0B;
+    --text-app: #f5f5f5;
+    --border-app: rgba(255, 255, 255, 0.08);
+  }
+
+  html.light, body.light {
+    color-scheme: light;
+    --bg-app: #f8fafc;
+    --text-app: #0f172a;
+    --border-app: rgba(0, 0, 0, 0.08);
+  }
+
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-app);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.4);
+}
+
+/* ================= IEEE & EXECUTIVE REPORT PRINTING STYLES ================= */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in 0.5in 0.6in 0.5in;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.18 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide non-printable app UI elements when printing */
+  body > *:not(#root),
+  .no-print,
+  button,
+  header,
+  nav,
+  aside {
+    display: none !important;
+  }
+
+  /* Hide modal backdrop, top bar buttons, edit panel when printing */
+  .fixed.inset-0.bg-slate-950\/80,
+  .bg-[#141415],
+  .border-b.border-slate-800,
+  .w-80.bg-slate-900\/95 {
+    display: none !important;
+  }
+
+  /* Show and stretch printable paper element */
+  #printable-pdf-area,
+  #printable-pdf-area * {
+    visibility: visible !important;
+  }
+
+  #printable-pdf-area {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+  }
+
+  .ieee-header-bar {
+    font-family: Inter, Arial, sans-serif !important;
+    font-size: 8pt !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    border-bottom: 1px solid #000 !important;
+    padding-bottom: 3px !important;
+    margin-bottom: 12px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    color: #000 !important;
+  }
+
+  .ieee-title {
+    font-size: 18pt !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    margin: 8px 0 !important;
+    line-height: 1.2 !important;
+    color: #000 !important;
+    font-family: "Times New Roman", Times, serif !important;
+  }
+
+  .ieee-authors {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    text-align: center !important;
+    margin: 8px 0 12px 0 !important;
+    padding: 6px 0 !important;
+    border-top: 1px solid #000 !important;
+    border-bottom: 1px solid #000 !important;
+    font-family: Inter, Arial, sans-serif !important;
+    font-size: 8.5pt !important;
+  }
+
+  .ieee-abstract-box {
+    font-size: 9pt !important;
+    text-align: justify !important;
+    margin-bottom: 12px !important;
+    line-height: 1.22 !important;
+    padding: 6px 8px !important;
+    background: #fafafa !important;
+    border: 1px solid #ccc !important;
+  }
+
+  .ieee-body-cols {
+    column-count: 2 !important;
+    column-gap: 0.28in !important;
+    column-fill: balance !important;
+    text-align: justify !important;
+    font-size: 9.5pt !important;
+    line-height: 1.18 !important;
+  }
+
+  .ieee-section {
+    margin-bottom: 10px !important;
+    break-inside: avoid-page !important;
+  }
+
+  .ieee-sec-title {
+    text-align: center !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 9.5pt !important;
+    margin-top: 8px !important;
+    margin-bottom: 4px !important;
+    font-family: Inter, Arial, sans-serif !important;
+    border-bottom: 1px solid #999 !important;
+    padding-bottom: 2px !important;
+  }
+
+  .ieee-table-wrap {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 10px 0 !important;
+  }
+
+  table.ieee-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 8pt !important;
+  }
+
+  table.ieee-table th, table.ieee-table td {
+    border: 1px solid #000 !important;
+    padding: 3px 5px !important;
+  }
+
+  .ieee-references {
+    margin-top: 12px !important;
+    padding-top: 6px !important;
+    border-top: 1.5px solid #000 !important;
+  }
+
+  .ieee-ref-item {
+    font-size: 8.5pt !important;
+    margin-bottom: 3px !important;
+  }
+}
+
